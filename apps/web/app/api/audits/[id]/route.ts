@@ -5,8 +5,9 @@ import { supabaseAdmin } from '@/lib/supabase'
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const session = await getServerSession(authOptions)
   if (!session?.user?.id) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -14,14 +15,14 @@ export async function GET(
 
   // Validate audit ID format (UUID)
   const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-  if (!uuidPattern.test(params.id)) {
+  if (!uuidPattern.test(id)) {
     return NextResponse.json({ error: 'Invalid audit ID format' }, { status: 400 })
   }
 
   const { data: audit } = await supabaseAdmin
     .from('audits')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id)
     .eq('user_id', session.user.id)
     .single()
 
@@ -35,7 +36,7 @@ export async function GET(
     const { data } = await supabaseAdmin
       .from('audit_findings')
       .select('*')
-      .eq('audit_id', params.id)
+      .eq('audit_id', id)
       .order('severity', { ascending: true })
     findings = data || []
   }

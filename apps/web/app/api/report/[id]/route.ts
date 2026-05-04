@@ -4,17 +4,18 @@ import { supabaseAdmin } from '@/lib/supabase'
 // Public API — no auth required, but only returns audits marked as shared
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params
   const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-  if (!uuidPattern.test(params.id)) {
+  if (!uuidPattern.test(id)) {
     return NextResponse.json({ error: 'Invalid report ID' }, { status: 400 })
   }
 
   const { data: audit } = await supabaseAdmin
     .from('audits')
     .select('id, repo_name, grade, score, status, summary, created_at, shared')
-    .eq('id', params.id)
+    .eq('id', id)
     .eq('shared', true)
     .single()
 
@@ -27,7 +28,7 @@ export async function GET(
     const { data } = await supabaseAdmin
       .from('audit_findings')
       .select('severity, type, file, line, description, fix')
-      .eq('audit_id', params.id)
+      .eq('audit_id', id)
       .order('severity', { ascending: true })
     findings = data || []
   }

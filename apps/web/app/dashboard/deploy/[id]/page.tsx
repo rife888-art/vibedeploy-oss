@@ -31,10 +31,11 @@ async function getDeploy(id: string, userId: string) {
   return { deploy, issues: issues || [] }
 }
 
-export default async function DeployDetailPage({ params }: { params: { id: string } }) {
+export default async function DeployDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const session = await getServerSession(authOptions)
   if (!session) redirect('/auth/signin')
-  const result = await getDeploy(params.id, session.user.id)
+  const result = await getDeploy(id, session.user.id)
 
   if (!result) notFound()
 
