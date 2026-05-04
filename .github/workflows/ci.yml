@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install root deps
+        run: npm install --no-audit --no-fund
+
+      - name: Install web deps
+        working-directory: apps/web
+        run: npm install --no-audit --no-fund
+
+      - name: Type-check
+        working-directory: apps/web
+        run: npx tsc --noEmit
+        env:
+          ANTHROPIC_API_KEY: stub
+          NEXTAUTH_SECRET: stub-secret-that-is-at-least-32-characters-long
+          NEXTAUTH_URL: http://localhost:3000
+          GITHUB_CLIENT_ID: stub
+          GITHUB_CLIENT_SECRET: stub
+          SUPABASE_URL: https://stub.supabase.co
+          SUPABASE_ANON_KEY: stub
+          SUPABASE_SERVICE_KEY: stub
+          NEXT_PUBLIC_SUPABASE_URL: https://stub.supabase.co
+
+      - name: Build
+        working-directory: apps/web
+        run: npm run build
+        env:
+          ANTHROPIC_API_KEY: stub
+          NEXTAUTH_SECRET: stub-secret-that-is-at-least-32-characters-long
+          NEXTAUTH_URL: http://localhost:3000
+          GITHUB_CLIENT_ID: stub
+          GITHUB_CLIENT_SECRET: stub
+          SUPABASE_URL: https://stub.supabase.co
+          SUPABASE_ANON_KEY: stub
+          SUPABASE_SERVICE_KEY: stub
+          NEXT_PUBLIC_SUPABASE_URL: https://stub.supabase.co
