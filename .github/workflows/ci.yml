@@ -18,11 +18,11 @@ jobs:
           node-version: 20
 
       - name: Install root deps
-        run: npm install --no-audit --no-fund
+        run: npm install --no-audit --no-fund --legacy-peer-deps
 
       - name: Install web deps
         working-directory: apps/web
-        run: npm install --no-audit --no-fund
+        run: npm install --no-audit --no-fund --legacy-peer-deps
 
       - name: Type-check
         working-directory: apps/web
