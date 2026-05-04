@@ -1,0 +1,41 @@
+name: ✨ Feature request
+description: Suggest an idea for VibeDeploy.
+title: "[feat]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Start with the user, not the solution.
+      placeholder: When I audit a monorepo, the report only covers 30 files. I can't see findings from the rest of the codebase.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      placeholder: Add a per-package audit mode that lets me pick which subdirectory to scan.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      placeholder: I tried running multiple audits with different repos, but it's slow and the results aren't unified.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this for you?
+      options:
+        - Nice to have
+        - Would use it monthly
+        - Would use it weekly
+        - Blocking my use of the tool
+    validations:
+      required: true

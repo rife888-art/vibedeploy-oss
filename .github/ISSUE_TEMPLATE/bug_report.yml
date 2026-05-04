@@ -1,0 +1,63 @@
+name: 🐛 Bug report
+description: Something broke. Help us fix it.
+title: "[bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. The more specific you can be, the faster we can fix it.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+      placeholder: When I clicked "Run audit" on a private repo, the page hung for 30s and then showed "An error occurred during analysis."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      placeholder: I expected to see a list of findings, or a clear error if my GitHub permissions were wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Sign in with GitHub
+        2. Pick a private repo
+        3. Click "Run audit"
+        4. Wait 30 seconds
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & OS
+      placeholder: Chrome 142 on macOS 15
+    validations:
+      required: false
+
+  - type: input
+    id: deployment
+    attributes:
+      label: Deployment
+      placeholder: e.g. self-hosted on Vercel, local dev, hosted demo
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: Paste any relevant server logs or screenshots. Strip secrets first.
+      render: shell
+    validations:
+      required: false

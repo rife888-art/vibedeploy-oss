@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/rife888-art/vibedeploy-oss/discussions
+    about: Ask questions, share ideas, show what you built.
+  - name: 🔐 Security vulnerability
+    url: https://github.com/rife888-art/vibedeploy-oss/security/advisories/new
+    about: Please report security issues privately.
