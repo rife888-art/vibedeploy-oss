@@ -32,11 +32,11 @@ Most security scanners are noisy. They flag every theoretical risk and bury real
 
 ## 📸 Screenshots
 
-> _Drop your own screenshots into `docs/screenshots/` and they'll render here._
+![Landing](docs/screenshots/landing.png)
 
-| Dashboard | Audit detail | Findings |
-| --- | --- | --- |
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Audit](docs/screenshots/audit.png) | ![Findings](docs/screenshots/findings.png) |
+| Sign in | Docs |
+| --- | --- |
+| ![Sign in](docs/screenshots/signin.png) | ![Docs](docs/screenshots/docs.png) |
 
 ---
 
